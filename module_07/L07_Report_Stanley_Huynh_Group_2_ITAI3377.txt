@@ -1,0 +1,108 @@
+Analysis of AoI-PLP Trade-Off in IIoT Networks
+Introduction
+This report analyzes the trade-off between Age of Information (AoI) and Packet Loss Probability (PLP) in Industrial Internet of Things (IIoT) networks. Drawing on theoretical insights from Farag et al. (2023) and leveraging simulated network data, both machine learning (Random Forest) and deep learning models were developed to understand how various network parameters influence data freshness and reliability.
+Conceptual Overview
+Age of Information (AoI) is the metric used to quantify data freshness, representing the time elapsed since the latest update was generated. In IIoT applications, ensuring low AoI is critical to real-time decision-making and process control. In contrast, Packet Loss Probability (PLP) measures the likelihood of data packets being lost, directly impacting the reliability of communications.
+Traffic Types:
+
+
+AoI-oriented traffic focuses on delivering the freshest data possible (e.g., continuous sensor updates).
+
+
+Deadline-oriented traffic emphasizes meeting strict timing constraints (e.g., control commands for automated systems).
+
+
+Data Exploration and Visualization
+The dataset comprises the following key columns: timestamp, node_id, traffic_type, transmission_probability, capture_threshold, num_nodes, channel_quality, age_of_information, and packet_loss_probability. Initial data exploration included examining basic statistics and identifying patterns using several visualizations:
+Scatter Plot: Transmission Probability vs. AoI
+ 
+
+
+Box Plot: AoI grouped by Traffic Type
+ 
+
+
+Correlation Heatmap: Exploring relationships among network parameters
+ 
+
+
+These visualizations revealed that while higher transmission probabilities tend to reduce AoI, increased network load and poor channel quality may simultaneously elevate PLP. The box plot highlighted differences in AoI distribution between traffic types, and the heatmap suggested that network congestion and interference are key factors affecting both metrics.
+Machine Learning Model Development
+Two modeling approaches were implemented:
+Random Forest Model for AoI Prediction:
+
+
+Preprocessing: Data cleaning, encoding of the categorical variable (traffic_type), and feature scaling were performed.
+
+
+Performance:
+
+
+MSE: 2593566.90
+
+
+R²: -1.56
+ The Random Forest model struggled to capture the variability in AoI, as evidenced by low R² values.
+
+
+Deep Learning Model for Joint AoI and PLP Prediction:
+ A neural network was designed with two hidden layers (64 and 32 neurons) to predict both AoI and PLP simultaneously.
+
+
+AoI Prediction Metrics:
+
+
+MSE: 2,165,942.22
+
+
+R²: 0.02
+
+
+PLP Prediction Metrics:
+
+
+MSE: 0.02
+
+
+R²: 0.37
+ These results indicate that the deep learning model performs poorly for AoI while achieving moderate performance for PLP.
+
+
+
+Analysis and Discussion
+Key Factors Influencing the AoI-PLP Trade-off:
+Transmission Probability: Increasing transmission frequency reduces AoI but can lead to higher collisions, increasing PLP.
+
+
+Network Load (num_nodes) & Channel Quality: Higher network congestion elevates both AoI and PLP. Better channel quality and optimized capture thresholds help mitigate these effects.
+
+
+Strategies for Optimizing Network Performance:
+Adaptive Transmission Control:
+ Dynamically adjust transmission probabilities based on real-time network congestion and interference levels. This strategy helps reduce collisions during peak load times while maintaining low AoI during less congested periods.
+
+
+Priority-Based Scheduling:
+ Implement differentiated scheduling for AoI-oriented versus deadline-oriented traffic. By prioritizing time-sensitive updates, the network can ensure timely data delivery while still managing overall reliability.
+
+
+Real-World Applications:
+Smart Manufacturing:
+ In smart factories, ensuring both fresh and reliable sensor data is vital for real-time process control and preventive maintenance. Optimizing the AoI-PLP balance can reduce downtime and improve safety.
+
+
+Autonomous Vehicle Networks:
+ Reliable, real-time communication between vehicles and infrastructure is crucial for collision avoidance and efficient traffic management. Understanding the AoI-PLP trade-off supports the design of robust communication protocols that ensure safety in dynamic environments.
+
+
+Conclusion
+The analysis highlights the complexity of managing data freshness and reliability in IIoT networks. While current models show limitations—particularly in predicting AoI—further improvements through enhanced feature engineering and adaptive modeling strategies are recommended. These insights pave the way for developing more resilient and efficient IIoT systems in real-world applications.
+
+
+
+
+
+
+References
+Farag, H., Ali, S. M., & Stefanović, Č. (2023). On the Analysis of AoI-Reliability Tradeoff in Heterogeneous IIoT Networks. arXiv preprint arXiv:2311.13336.
+

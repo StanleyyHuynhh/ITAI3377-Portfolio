@@ -1,0 +1,80 @@
+Liverpool Smart Pedestrians Project
+Introduction and Objectives
+Main Goals of the Liverpool Smart Pedestrians Project: The project aimed to address the growing urban planning challenges in Liverpool, Australia, by developing a smart visual sensor designed for real-time traffic monitoring. The primary goal was to create an edge-computing device that utilized computer vision and deep neural networks to track multi-modal transportation (pedestrians, vehicles, and cyclists) while ensuring privacy compliance. This would enhance urban mobility, improve traffic management, and provide data-driven insights for better city planning.
+
+
+Urban Planning Challenges Addressed:
+The city of Liverpool is experiencing rapid urban growth, with projections indicating a substantial increase in pedestrian traffic due to redevelopment. The challenge was to monitor traffic effectively in a cost-efficient way, leveraging existing infrastructure (such as CCTV networks).
+The project also addressed the issue of ensuring privacy in smart city applications by processing video data locally on edge-computing devices instead of transmitting raw video feeds.
+
+Methodology
+Methodology Used in the Project:
+Design and Evaluation of Edge-Computing Device: The sensor was designed to operate using the edge-computing paradigm, where video analytics and object detection are carried out locally on the device. This reduces the bandwidth usage and ensures that only anonymized, meta-data is transmitted.
+Sensor Requirements and Constraints: The sensor needed to be multi-modal (detecting pedestrians, vehicles, and cyclists), privacy-compliant (by processing data on-site), and scalable to work with existing CCTV networks. Additionally, the sensor design had to allow for interoperability with various other sensor technologies that could be added in the future.
+
+
+Sensor Development Considerations:
+
+
+The sensor was designed to handle real-time video feeds, ensuring that no raw video data is transmitted to maintain privacy. It was also designed to work with existing infrastructure, minimizing costs and deployment time.
+
+Technology and Implementation
+Hardware and Software Components:
+Hardware: The system relies on the NVIDIA Jetson TX2, a powerful embedded computing platform for real-time video processing. Additionally, the Pycom LoPy 4 module allows communication via LoRaWAN, making it suitable for long-range, low-power data transmission.
+Software: The device runs YOLO V3 (You Only Look Once) for real-time object detection and SORT (Simple Online and Real-Time Tracking) for tracking detected objects across video frames. YOLO V3 offers high-speed and accurate object detection, which is necessary for the system to operate efficiently in an urban setting.
+
+Edge-Computing Paradigm: The edge-computing paradigm enables the sensor to process data locally on the device rather than sending raw video data to a central server. This reduces bandwidth usage and ensures that only aggregated, non-personalized data is transmitted, thus addressing privacy concerns.
+
+
+
+Validation and Performance
+Evaluation of Validation Experiments:
+The sensor was evaluated using the Oxford Town Center Dataset, where the system demonstrated a mean accuracy of 69% in detecting pedestrians. The accuracy of object detection was somewhat lower due to underestimations in crowded scenarios, but the system was still able to perform well in tracking and detecting objects.
+The system processed video at approximately 20 FPS under ideal conditions, though performance could drop slightly when tracking more objects due to the computational demands of the SORT algorithm, which was not optimized for GPU processing.
+
+System Utilization Insights: The system demonstrated efficient use of resources. It processed frames quickly while transmitting only necessary meta-data, which kept network bandwidth usage low. However, optimizations to the SORT algorithm and the potential use of GPU for tracking tasks could improve the system's performance.
+
+
+
+Real-World Applications
+Indoor Deployment during Emergency Evacuation:
+
+
+In one experiment, the sensor was deployed inside a building to monitor foot traffic during an emergency evacuation. The sensor accurately tracked the movement of people, showing its potential for crowd management and monitoring during emergencies, like fire alarms.
+Outdoor Deployment in Liverpool:
+
+
+The sensor was deployed in the town center of Liverpool to monitor pedestrian, vehicle, and bicycle traffic. The deployment was successful in capturing the patterns of movement, which provided valuable insights for urban planners to understand peak traffic times, mobility trends, and pedestrian interactions with traffic flow.
+
+Challenges and Future Work
+Main Challenges:
+Accuracy Issues: The system occasionally underestimated the number of detected objects, especially in crowded environments, which affected the accuracy of pedestrian counts.
+Tracking Performance: The tracking algorithm (SORT) was implemented on the CPU, causing occasional bottlenecks when tracking many objects simultaneously.
+
+Proposed Solutions:
+Implementing GPU-accelerated tracking algorithms could improve the performance of object tracking, especially in high-density urban environments.
+Additional refinements in the object detection algorithms to address the underestimation of object counts and improve overall accuracy.
+
+
+Future Technological Developments:
+Future versions of the sensor could benefit from using the NVIDIA Xavier platform, which offers more processing power and CUDA cores, significantly improving the overall performance.
+The use of optimized deep learning frameworks such as TensorFlow or Caffe could also provide performance improvements over the current implementation using PyTorch.
+
+G. Personal Evaluation
+Critical Evaluation of the Project's Success:
+The project successfully demonstrated the feasibility of using edge-computing sensors for real-time traffic monitoring. It effectively leveraged existing CCTV infrastructure, reducing costs while maintaining privacy compliance.
+The system showed potential in real-world settings, but further improvements are needed in terms of accuracy and performance, particularly for applications in high-traffic areas.
+
+Impact on Smart City Initiatives:
+This project provides a scalable solution for traffic monitoring, making it a valuable tool for smart cities. The use of existing infrastructure reduces deployment costs, and the edge-computing model ensures privacy, a crucial factor in smart city applications.
+
+Suggested Improvements:
+Incorporating more robust AI algorithms for better detection and tracking accuracy, especially in crowded or complex environments.
+Optimizing the tracking algorithm and ensuring it takes full advantage of GPU capabilities would improve performance in high-density traffic areas.
+
+References
+Bibri, S. E., & Krogstie, J. (2017). Smart sustainable cities: A spatial systems framework for urban sustainability. Springer.
+Gupta, M., & Chien, S. (2018). Edge computing for smart cities: A survey and research directions. Springer.
+Romero, L., et al. (2019). Literature review of sensing methods for traffic monitoring. Transportation Research Part C: Emerging Technologies, 101, 145-156.
+Satyanarayanan, M., et al. (2016). The edge computing paradigm for the Internet of Things. IEEE Internet of Things Journal, 3(3), 557-566.
+
